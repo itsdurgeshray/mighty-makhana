@@ -149,7 +149,7 @@ export default function HeroSection() {
         <motion.div {...fadeInUp(0.45)} className="flex justify-center">
           <motion.a
             {...({} as HTMLMotionProps<"a">)}
-            href="/products"
+            href="https://api.whatsapp.com/send/?phone=917005713828&text&type=phone_number&app_absent=0"
             whileHover={{ scale: 1.05, boxShadow: "0 0 20px var(--primary)" }}
             whileTap={{ scale: 0.97, filter: "brightness(0.95)" }}
             className="px-12 py-4 rounded-full text-base md:text-lg font-medium text-white bg-[var(--primary)] text-center shadow-[6px_6px_12px_rgba(0,0,0,0.12),-6px_-6px_12px_rgba(255,255,255,0.6)]"
