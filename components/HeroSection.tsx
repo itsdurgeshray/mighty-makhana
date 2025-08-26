@@ -1,4 +1,4 @@
-import { motion, HTMLMotionProps } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 
 export default function HeroSection() {
@@ -9,7 +9,7 @@ export default function HeroSection() {
     return () => clearTimeout(t);
   }, []);
 
-  // ------- THEME (exactly your scheme) -------
+  // ------- THEME -------
   const Theme = () => (
     <style jsx global>{`
       :root {
@@ -38,7 +38,6 @@ export default function HeroSection() {
 
   const kernels = useMemo<Kernel[]>(() => {
     const arr: Kernel[] = [];
-
     const addKernel = (k: Kernel) => {
       if (k.x > safeZone.xMin && k.x < safeZone.xMax && k.y > safeZone.yMin && k.y < safeZone.yMax) {
         k.y = k.y < 50 ? safeZone.yMin - rand(6, 12) : safeZone.yMax + rand(6, 12);
@@ -46,11 +45,8 @@ export default function HeroSection() {
       arr.push(k);
     };
 
-    for (let i = 0; i < 12; i++)
-      addKernel({ x: rand(2, 48), y: rand(6, 94), size: rand(20, 40), rot: rand(0, 360), layer: i % 3 === 0 ? "fg" : i % 2 === 0 ? "mg" : "bg" });
-
-    for (let i = 0; i < 12; i++)
-      addKernel({ x: rand(52, 98), y: rand(6, 94), size: rand(20, 40), rot: rand(0, 360), layer: i % 3 === 0 ? "fg" : i % 2 === 0 ? "mg" : "bg" });
+    for (let i = 0; i < 12; i++) addKernel({ x: rand(2, 48), y: rand(6, 94), size: rand(20, 40), rot: rand(0, 360), layer: i % 3 === 0 ? "fg" : i % 2 === 0 ? "mg" : "bg" });
+    for (let i = 0; i < 12; i++) addKernel({ x: rand(52, 98), y: rand(6, 94), size: rand(20, 40), rot: rand(0, 360), layer: i % 3 === 0 ? "fg" : i % 2 === 0 ? "mg" : "bg" });
 
     return arr;
   }, []);
@@ -61,7 +57,7 @@ export default function HeroSection() {
   const fadeInUp = (delay = 0) => ({
     initial: { opacity: 0, y: 40 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: 1.0, ease: "easeOut", delay } as any
+    transition: { duration: 1.0, ease: "easeOut", delay }
   });
 
   return (
@@ -71,32 +67,28 @@ export default function HeroSection() {
       {/* Alive Background */}
       <div className="absolute inset-0 -z-20 grain">
         <motion.div
-          {...({} as HTMLMotionProps<'div'>)}
           className="absolute -top-56 -left-56 w-[520px] h-[520px] rounded-full blur-3xl"
           style={{ background: "radial-gradient(50% 50% at 50% 50%, var(--secondary) 0%, transparent 70%)" }}
           animate={{ scale: [1, 1.08, 1], opacity: [0.28, 0.36, 0.28] }}
-          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" } as any}
+          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          {...({} as HTMLMotionProps<'div'>)}
           className="absolute top-32 right-[-180px] w-[640px] h-[640px] rounded-full blur-3xl"
           style={{ background: "radial-gradient(50% 50% at 50% 50%, color-mix(in oklab, var(--primary) 40%, transparent) 0%, transparent 70%)" }}
           animate={{ rotate: [0, 20, -20, 0], opacity: [0.25, 0.33, 0.25] }}
-          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" } as any}
+          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          {...({} as HTMLMotionProps<'div'>)}
           className="absolute bottom-16 left-6 w-[420px] h-[420px] rounded-full blur-3xl"
           style={{ background: "radial-gradient(50% 50% at 50% 50%, color-mix(in oklab, var(--primary) 25%, var(--secondary) 50%) 0%, transparent 70%)" }}
           animate={{ x: [0, 16, -10, 0], y: [0, -10, 8, 0], opacity: [0.18, 0.26, 0.18] }}
-          transition={{ duration: 24, repeat: Infinity, ease: "easeInOut" } as any}
+          transition={{ duration: 24, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          {...({} as HTMLMotionProps<'div'>)}
           className="absolute inset-0 opacity-10"
-          style={{ backgroundImage: `radial-gradient(circle at 1px 1px, var(--secondary) 1px, transparent 1.2px)` , backgroundSize: '26px 26px' }}
+          style={{ backgroundImage: `radial-gradient(circle at 1px 1px, var(--secondary) 1px, transparent 1.2px)`, backgroundSize: '26px 26px' }}
           animate={{ backgroundPositionX: [0, 26, 0], backgroundPositionY: [0, -26, 0] }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" } as any}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
         />
       </div>
 
@@ -117,13 +109,12 @@ export default function HeroSection() {
           }}
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, y: [0, -20, 0], rotate: [k.rot, k.rot + 12, k.rot - 12, k.rot] }}
-          transition={{ duration: speedByLayer[k.layer], repeat: Infinity, ease: "easeInOut", delay: i * 0.06 } as any}
+          transition={{ duration: speedByLayer[k.layer], repeat: Infinity, ease: "easeInOut", delay: i * 0.06 }}
         />
       ))}
 
       {/* Center Content */}
       <motion.div
-        {...({} as HTMLMotionProps<'div'>)}
         initial="initial"
         animate={isLoaded ? "animate" : "initial"}
         className="z-30 text-center flex flex-col items-center px-6 mt-[-14vh]"
@@ -167,10 +158,9 @@ export default function HeroSection() {
 
       {/* Bowl */}
       <motion.div
-        {...({} as HTMLMotionProps<'div'>)}
         initial={{ opacity: 0, y: 120, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 1.2, ease: "easeOut", delay: 0.6 } as any}
+        transition={{ duration: 1.2, ease: "easeOut", delay: 0.6 }}
         className="absolute bottom-[-26%] w-full flex justify-center pointer-events-none z-20"
       >
         <img
@@ -183,10 +173,9 @@ export default function HeroSection() {
 
       {/* Bulk Order CTA */}
       <motion.div
-        {...({} as HTMLMotionProps<'div'>)}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.0, delay: 0.9 } as any}
+        transition={{ duration: 1.0, delay: 0.9 }}
         className="fixed bottom-[10%] right-6 md:right-10 backdrop-blur-xl bg-white/35 border border-white/50 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] px-5 py-4 z-40"
         style={{ fontFamily: 'Comfortaa, sans-serif', color: 'var(--text)' }}
       >
@@ -201,10 +190,9 @@ export default function HeroSection() {
 
       {/* Branding */}
       <motion.nav
-        {...({} as HTMLMotionProps<'div'>)}
         initial={{ opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 } as any}
+        transition={{ duration: 0.8 }}
         className="absolute top-0 left-0 w-full flex items-center px-6 md:px-10 py-5 z-40"
       >
         <div className="text-2xl font-bold" style={{ color: 'var(--primary)', fontFamily: 'Comfortaa, sans-serif' }}>MakhanaCo</div>
